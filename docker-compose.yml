@@ -1,0 +1,76 @@
+version: "3"
+services:
+  relayer0:
+    image: chainsafe/chainbridge-core-example:evm-celo-dev
+    restart: unless-stopped
+    container_name: celo-ethereum-relayer0
+    ports:
+      - "8002:8001"
+      - "2112:2112"
+    volumes:
+      - ./blockstore0:/blockstore
+      - ./config0:/config
+      - ./keys0:/keys
+    environment:
+      - KEYSTORE_PASSWORD=1234567890
+      - BLOCK_TIMEOUT=300
+    command:
+      - run
+      - --config=/config
+      - --keystore=/keys
+      - --blockstore=/blockstore0
+      - --latest
+
+  relayer1:
+    image: chainsafe/chainbridge-core-example:evm-celo-dev
+    restart: unless-stopped
+    container_name: celo-ethereum-relayer1
+    ports:
+      - "8003:8001"
+      - "2212:2112"
+    volumes:
+      - ./blockstore1:/blockstore
+      - ./config1:/config
+      - ./keys1:/keys
+    environment:
+      - KEYSTORE_PASSWORD=1234567890
+      - BLOCK_TIMEOUT=300
+    command:
+      - run
+      - --config=/config
+      - --keystore=/keys
+      - --blockstore=/blockstore1
+      - --latest
+
+  relayer2:
+    image: chainsafe/chainbridge-core-example:evm-celo-dev
+    restart: unless-stopped
+    container_name: celo-ethereum-relayer2
+    ports:
+      - "8004:8001"
+      - "2312:2112"
+    volumes:
+      - ./blockstore2:/blockstore
+      - ./config2:/config
+      - ./keys2:/keys
+    environment:
+      - KEYSTORE_PASSWORD=1234567890
+      - BLOCK_TIMEOUT=300
+    command:
+      - run
+      - --config=/config
+      - --keystore=/keys
+      - --blockstore=/blockstore2
+      - --latest
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prom
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.config.file=/etc/prometheus/web.yml
+

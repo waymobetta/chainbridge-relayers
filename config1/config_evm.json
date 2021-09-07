@@ -1,0 +1,10 @@
+{
+    "name": "ethereum",
+    "id": "1",
+    "endpoint": "ws://localhost:2345",
+    "from": "0x42F567FEA3Cf5F27186344F04A5774A753B55b39",
+    "bridge": "",
+    "erc20Handler": "",
+    "gasLimit": "1000000",
+    "maxGasPrice":"20000000000"
+}

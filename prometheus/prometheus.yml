@@ -1,0 +1,17 @@
+global:
+        scrape_interval: 10s
+        evaluation_interval: 10s
+
+scrape_configs:
+        - job_name: relayer0
+          metrics_path: /metrics
+          static_configs:
+                  - targets: ['relayer0:2112']
+        - job_name: relayer1
+          metrics_path: /metrics
+          static_configs:
+                  - targets: ['relayer1:2112']
+        - job_name: relayer2
+          metrics_path: /metrics
+          static_configs:
+                  - targets: ['relayer2:2112']
